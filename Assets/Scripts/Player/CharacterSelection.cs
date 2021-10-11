@@ -4,7 +4,7 @@ public class CharacterSelection : MonoBehaviour
 {
     private GameObject[] characterList;
     private int index;
-   [SerializeField] movement move;
+    [SerializeField] movement move;
     void Start()
     {
         index = PlayerPrefs.GetInt("CharacterSelected");
@@ -17,11 +17,12 @@ public class CharacterSelection : MonoBehaviour
             animal.SetActive(false);
         if (characterList[index])
         {
-         characterList[index].SetActive(true);
+            characterList[index].SetActive(true);
             if (CameraControl.instance != null)
                 CameraControl.instance.target = characterList[index].transform.GetChild(characterList[index].transform.childCount - 1);
         }
-        move.Initilize();
+        if (move != null)
+            move.Initilize();
     }
     public void toggleLeft()
     {

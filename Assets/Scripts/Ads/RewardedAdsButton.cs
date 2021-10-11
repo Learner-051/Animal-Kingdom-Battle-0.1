@@ -59,7 +59,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         Debug.Log("Show complete");
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("Unity Ads Rewarded Ad Completed");
+            //Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
             Collectables.DoubleScore();
             FindObjectOfType<GameOver>().GetComponent<GameOver>().OnClickAd();

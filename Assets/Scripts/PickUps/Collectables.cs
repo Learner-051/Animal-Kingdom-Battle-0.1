@@ -38,16 +38,17 @@ public class Collectables : MonoBehaviour
     {
         scoreText.text = score.ToString();
         highScoreText.text = highScore.ToString();
-        if (score > PlayerPrefs.GetInt("highScore"))
+        if (score > highScore)
         {
             PlayerPrefs.SetInt("highScore", score);
             highScoreText.text = score.ToString();
         }
+
         if (countDownStartValue > 0)
         {
             TimeSpan spanTime = TimeSpan.FromSeconds(countDownStartValue);
             timer.text = "Time : " + spanTime.Minutes + " : " + spanTime.Seconds;
-            if (checkTime.active == true)
+            if (checkTime.activeSelf == true)
             {
                 countDownStartValue--;
             }
@@ -58,12 +59,40 @@ public class Collectables : MonoBehaviour
             gameWin.SetActive(true);
             //audioSource.PlayOneShot(winnersound, 0.7F);
             CancelInvoke("SetScore");
+
+            for (int i = 0; i < ScoreManager.instance.sd.scores.Count; i++) 
+            { 
+            
+                if(ScoreManager.instance.sd.scores[i].pName.Equals(GameContants.PlayerName) && ScoreManager.instance.sd.scores[i].newScore < score)
+                {
+                    if (ScoreManager.instance.sd.scores[i].newScore > score)
+                    {
+                        ScoreManager.instance.sd.scores[i].newScore = score;
+                        ScoreManager.instance.SaveScore();
+                        return;
+                    }
+                }
+            }
+                ScoreManager.instance.AddScore(new Score(GameContants.PlayerName, score));
+
         }
         else
         {
             gameover.SetActive(true);
             CancelInvoke("SetScore");
+            for (int i = 0; i < ScoreManager.instance.sd.scores.Count; i++)
+            {
+
+                if (ScoreManager.instance.sd.scores[i].pName.Equals(GameContants.PlayerName))
+                {
+                    ScoreManager.instance.sd.scores[i].newScore = score;
+                    ScoreManager.instance.SaveScore();
+                    return;
+                }
+            }
+            ScoreManager.instance.AddScore(new Score(GameContants.PlayerName, score));
         }
+
     }
     public static void DoubleScore()
     {
