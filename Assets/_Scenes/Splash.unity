@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 37307740}
   - component: {fileID: 37307739}
   m_Layer: 0
-  m_Name: SceneChanger
+  m_Name: Scene Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBeforeLoading: 5
-  sceneToLoad: Main Menu_Backup
+  SelectedScene: 1
 --- !u!4 &37307740
 Transform:
   m_ObjectHideFlags: 0
@@ -200,7 +200,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0013427734, y: -0.0024414062}
+  m_AnchoredPosition: {x: 0.0014648438, y: -0.0024414062}
   m_SizeDelta: {x: 0.0026855469, y: -0.0048828125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &188589509
@@ -240,6 +240,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188589507}
   m_CullTransparentMesh: 0
+--- !u!1 &213312435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 213312437}
+  - component: {fileID: 213312436}
+  m_Layer: 0
+  m_Name: Ads Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &213312436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213312435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b62d777f3c13d24d86ed079e763f252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidGameId: 4393217
+  _iOsGameId: 4393216
+  _testMode: 0
+  _enablePerPlacementMode: 1
+--- !u!4 &213312437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213312435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 972.58374, y: 447.83884, z: -535.8322}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,6 +891,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ff4d9a735fcd549a35df92bc8f7068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sd:
+    scores: []
 --- !u!4 &1898973395
 Transform:
   m_ObjectHideFlags: 0

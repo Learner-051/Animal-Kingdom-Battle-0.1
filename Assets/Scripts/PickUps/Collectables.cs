@@ -20,8 +20,8 @@ public class Collectables : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         InvokeRepeating("SetScore", 0, 1f);
-        score = 0;
-        highScore = PlayerPrefs.GetInt("highScore");
+        score = 0;   
+        highScore = PlayerPrefs.GetInt(GameConstants.highScore);     
         highScoreText.text = highScore.ToString();
     }
     private void OnTriggerEnter(Collider other)
@@ -37,13 +37,12 @@ public class Collectables : MonoBehaviour
     private void SetScore()
     {
         scoreText.text = score.ToString();
-        highScoreText.text = highScore.ToString();
+        //highScoreText.text = highScore.ToString();
         if (score > highScore)
         {
-            PlayerPrefs.SetInt("highScore", score);
             highScoreText.text = score.ToString();
+            PlayerPrefs.SetInt(GameConstants.highScore, score);
         }
-
         if (countDownStartValue > 0)
         {
             TimeSpan spanTime = TimeSpan.FromSeconds(countDownStartValue);
@@ -52,45 +51,37 @@ public class Collectables : MonoBehaviour
             {
                 countDownStartValue--;
             }
-
         }
         else if (score >= 50)
         {
             gameWin.SetActive(true);
             //audioSource.PlayOneShot(winnersound, 0.7F);
             CancelInvoke("SetScore");
-
             for (int i = 0; i < ScoreManager.instance.sd.scores.Count; i++) 
             { 
-            
-                if(ScoreManager.instance.sd.scores[i].pName.Equals(GameContants.PlayerName) && ScoreManager.instance.sd.scores[i].newScore < score)
+                if(ScoreManager.instance.sd.scores[i].pName.Equals(GameConstants.PlayerName) && ScoreManager.instance.sd.scores[i].newScore <= score)
                 {
-                    if (ScoreManager.instance.sd.scores[i].newScore > score)
-                    {
-                        ScoreManager.instance.sd.scores[i].newScore = score;
-                        ScoreManager.instance.SaveScore();
-                        return;
-                    }
+                    ScoreManager.instance.sd.scores[i].newScore = score;
+                    ScoreManager.instance.SaveScore();
+                    return;    
                 }
             }
-                ScoreManager.instance.AddScore(new Score(GameContants.PlayerName, score));
-
+                ScoreManager.instance.AddScore(new Score(GameConstants.PlayerName, score));
         }
         else
         {
             gameover.SetActive(true);
             CancelInvoke("SetScore");
-            for (int i = 0; i < ScoreManager.instance.sd.scores.Count; i++)
+           /* for (int i = 0; i < ScoreManager.instance.sd.scores.Count; i++)
             {
-
-                if (ScoreManager.instance.sd.scores[i].pName.Equals(GameContants.PlayerName))
+                if (ScoreManager.instance.sd.scores[i].pName.Equals(GameConstants.PlayerName))
                 {
                     ScoreManager.instance.sd.scores[i].newScore = score;
                     ScoreManager.instance.SaveScore();
                     return;
                 }
             }
-            ScoreManager.instance.AddScore(new Score(GameContants.PlayerName, score));
+            ScoreManager.instance.AddScore(new Score(GameConstants.PlayerName, score)); */
         }
 
     }

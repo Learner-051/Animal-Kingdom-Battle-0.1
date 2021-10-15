@@ -7,7 +7,7 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] movement move;
     void Start()
     {
-        index = PlayerPrefs.GetInt("CharacterSelected");
+        index = PlayerPrefs.GetInt(GameConstants.characterSelected);
         characterList = new GameObject[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -17,6 +17,7 @@ public class CharacterSelection : MonoBehaviour
             animal.SetActive(false);
         if (characterList[index])
         {
+            
             characterList[index].SetActive(true);
             if (CameraControl.instance != null)
                 CameraControl.instance.target = characterList[index].transform.GetChild(characterList[index].transform.childCount - 1);
@@ -46,7 +47,7 @@ public class CharacterSelection : MonoBehaviour
     }
     public void SelectButton()
     {
-        PlayerPrefs.SetInt("CharacterSelected", index);
+        PlayerPrefs.SetInt(GameConstants.characterSelected, index);
     }
 
 }

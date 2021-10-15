@@ -64,7 +64,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
             Collectables.DoubleScore();
             FindObjectOfType<GameOver>().GetComponent<GameOver>().OnClickAd();
 
-            // Load another ad:
+             //Load another ad:
             Advertisement.Load(_adUnitId, this);
         }
     }
